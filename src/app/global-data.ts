@@ -1,5 +1,5 @@
 export interface GlobalData {
-    Date: Date;
+    Date: string;
     Infection: number;
     Deces: number;
     Guerisons: number;

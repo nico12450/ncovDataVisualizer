@@ -1,5 +1,5 @@
 export interface PaysData {
-    Date: Date;
+    Date: string;
     Pays: string;
     Infection: number;
     Deces: number;
