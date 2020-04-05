@@ -1,8 +1,23 @@
-<div>
+<!-- <div>
     <canvas baseChart [chartType]="chartType" [labels]="chartLabels" [datasets]="chartData">
     </canvas>
-</div>
+</div> -->
 
-<div *ngFor = "let e of globalData">
-    <div>date : {{e.Date |  date:'dd/MM/yyyy'}} | nombre de cas : {{e.Infection}} | nombre de décès : {{e.Deces}}</div>
+<!-- <button (click)="switchWithCases()">cases</button>
+<button (click)="switchWithDeaths()">deaths</button>
+<button (click)="switchWithHealings()">healings</button> -->
+
+<h1 class="text-center">Global data</h1>
+<app-global-cases-line-graph [withCases]="withCases" [withDeaths]="withDeaths" [withHealings]="withHealings"></app-global-cases-line-graph>
+<app-global-cases-doughnut-graph></app-global-cases-doughnut-graph>
+<h1 class="text-center">Country specific data</h1>
+<div>
+    <label>Pays</label>
+    <div>
+        <select [(ngModel)]="pays">
+            <option *ngFor="let p of paysList" [value]="p">{{p}}</option>
+        </select>
+    </div>
 </div>
+<app-country-cases-line-graph [pays]="pays"></app-country-cases-line-graph>
+<app-country-cases-bar-graph [pays]="pays"></app-country-cases-bar-graph>
