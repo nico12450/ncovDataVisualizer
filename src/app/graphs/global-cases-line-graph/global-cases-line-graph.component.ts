@@ -33,22 +33,25 @@ export class GlobalCasesLineGraphComponent implements OnInit, OnChanges {
     this.chartData = this.getGlobalCasesDeathsHealings(this.withCases, this.withDeaths, this.withHealings).y;
   }
 
-  getGlobalCasesDeathsHealings(withCases: boolean = true, withDeaths: boolean = false, withHealings: boolean = false): {x: Number[], y: {data: Number[], label: string}[]}{
+  getGlobalCasesDeathsHealings(withCases: boolean = true, withDeaths: boolean = false, withHealings: boolean = false): {x: string[], y: {data: Number[], label: string}[]}{
     
     let cases: {data: Number[], label: string} = {data: [], label: 'cases'};
     let deaths: {data: Number[], label: string} = {data: [], label: 'deaths'};
     let healings: {data: Number[], label: string} = {data: [], label: 'healings'};
-    let indexList: Number[] = [];
-    let i = 0;
+    let indexList: string[] = [];
+    // let i = 0;
 
     this.globalData.forEach(e => {
       cases.data.unshift(e.Infection);
       deaths.data.unshift(e.Deces);
       healings.data.unshift(e.Guerisons);
-      indexList.push(i++);
+      // indexList.push(i++);
+      indexList.push(new Date(e.Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
     });
+
+    indexList.reverse();
     
-    let result : {x: Number[], y: {data: Number[], label: string}[]} = {x: indexList, y : []};
+    let result : {x: string[], y: {data: Number[], label: string}[]} = {x: indexList, y : []};
 
     if(withCases){
       result.y.push(cases);

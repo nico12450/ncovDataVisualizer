@@ -29,13 +29,12 @@ export class CountryCasesLineGraphComponent implements OnInit, OnChanges {
     this.chartLabels = this.getGlobalCasesDeathsHealings().x;
   }
 
-  getGlobalCasesDeathsHealings(): {x: Number[], y: {data: Number[], label: string}[]}{
+  getGlobalCasesDeathsHealings(): {x: string[], y: {data: Number[], label: string}[]}{
     
     let cases: {data: Number[], label: string} = {data: [], label: 'cases'};
     let deaths: {data: Number[], label: string} = {data: [], label: 'deaths'};
     let healings: {data: Number[], label: string} = {data: [], label: 'healings'};
-    let indexList: Number[] = [];
-    let i = 0;
+    let indexList: string[] = [];
 
     this.paysData.forEach(e => {
 
@@ -43,12 +42,15 @@ export class CountryCasesLineGraphComponent implements OnInit, OnChanges {
         cases.data.unshift(e.Infection);
         deaths.data.unshift(e.Deces);
         healings.data.unshift(e.Guerisons);
-        indexList.push(i++);
+        indexList.push(new Date(e.Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
       }
 
+
     });
+
+    indexList.reverse();
     
-    let result : {x: Number[], y: {data: Number[], label: string}[]} = {x: indexList, y : []};
+    let result : {x: string[], y: {data: Number[], label: string}[]} = {x: indexList, y : []};
 
     result.y.push(cases);
     result.y.push(deaths);
