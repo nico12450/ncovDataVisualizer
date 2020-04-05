@@ -8,7 +8,8 @@
 <button (click)="switchWithHealings()">healings</button> -->
 
 <h1 class="text-center">Global data</h1>
-<app-global-cases-line-graph [withCases]="withCases" [withDeaths]="withDeaths" [withHealings]="withHealings"></app-global-cases-line-graph>
+<app-global-cases-line-graph></app-global-cases-line-graph>
+<app-global-cases-bar-graph></app-global-cases-bar-graph>
 <app-global-cases-doughnut-graph></app-global-cases-doughnut-graph>
 <h1 class="text-center">Country specific data</h1>
 <div>
@@ -21,3 +22,5 @@
 </div>
 <app-country-cases-line-graph [pays]="pays"></app-country-cases-line-graph>
 <app-country-cases-bar-graph [pays]="pays"></app-country-cases-bar-graph>
+<app-country-cases-doughnut-graph [pays]="pays"></app-country-cases-doughnut-graph>
+

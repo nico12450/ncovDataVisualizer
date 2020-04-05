@@ -13,10 +13,6 @@ export class GlobalCasesLineGraphComponent implements OnInit, OnChanges {
   globalData: GlobalData[] = data.GlobalData;
   paysData: PaysData[] = data.PaysData;
 
-  @Input() withCases: boolean;
-  @Input() withDeaths: boolean;
-  @Input() withHealings: boolean;
-
   chartType = 'line';
   chartData;
   chartLabels;
@@ -25,12 +21,12 @@ export class GlobalCasesLineGraphComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.chartData = this.getGlobalCasesDeathsHealings(this.withCases, this.withDeaths, this.withHealings).y;
+    this.chartData = this.getGlobalCasesDeathsHealings(true, true, true).y;
     this.chartLabels = this.getGlobalCasesDeathsHealings().x;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.chartData = this.getGlobalCasesDeathsHealings(this.withCases, this.withDeaths, this.withHealings).y;
+    this.chartData = this.getGlobalCasesDeathsHealings(true, true, true).y;
   }
 
   getGlobalCasesDeathsHealings(withCases: boolean = true, withDeaths: boolean = false, withHealings: boolean = false): {x: string[], y: {data: Number[], label: string}[]}{
@@ -39,13 +35,11 @@ export class GlobalCasesLineGraphComponent implements OnInit, OnChanges {
     let deaths: {data: Number[], label: string} = {data: [], label: 'deaths'};
     let healings: {data: Number[], label: string} = {data: [], label: 'healings'};
     let indexList: string[] = [];
-    // let i = 0;
 
     this.globalData.forEach(e => {
       cases.data.unshift(e.Infection);
       deaths.data.unshift(e.Deces);
       healings.data.unshift(e.Guerisons);
-      // indexList.push(i++);
       indexList.push(new Date(e.Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
     });
 
