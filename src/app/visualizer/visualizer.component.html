@@ -8,9 +8,20 @@
 <button (click)="switchWithHealings()">healings</button> -->
 
 <h1 class="text-center">Global data</h1>
-<app-global-cases-line-graph></app-global-cases-line-graph>
-<app-global-cases-bar-graph></app-global-cases-bar-graph>
-<app-global-cases-doughnut-graph></app-global-cases-doughnut-graph>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-4">
+            <app-global-cases-line-graph></app-global-cases-line-graph>
+        </div>
+        <div class="col-xl-4">
+            <app-global-cases-bar-graph></app-global-cases-bar-graph>
+        </div>
+        <div class="col-xl-4">
+            <app-global-cases-doughnut-graph></app-global-cases-doughnut-graph>
+        </div>
+    </div>
+</div>
+
 <h1 class="text-center">Country specific data</h1>
 <div>
     <label>Pays</label>
@@ -20,7 +31,20 @@
         </select>
     </div>
 </div>
-<app-country-cases-line-graph [pays]="pays"></app-country-cases-line-graph>
-<app-country-cases-bar-graph [pays]="pays"></app-country-cases-bar-graph>
-<app-country-cases-doughnut-graph [pays]="pays"></app-country-cases-doughnut-graph>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-4">
+            <app-country-cases-line-graph [pays]="pays"></app-country-cases-line-graph>
+        </div>
+        <div class="col-xl-4">
+            <app-country-cases-bar-graph [pays]="pays"></app-country-cases-bar-graph>
+        </div>
+        <div class="col-xl-4">
+            <app-country-cases-doughnut-graph [pays]="pays"></app-country-cases-doughnut-graph>
+        </div>
+    </div>
+</div>
+
+
+
 
