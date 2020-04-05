@@ -29,14 +29,23 @@ export class GlobalCasesBarGraphComponent implements OnInit {
     let healings: {data: Number[], label: string} = {data: [], label: 'healings'};
     let indexList: string[] = [];
 
-    this.globalData.forEach(e => {
+    let data = this.globalData;
 
-      cases.data.unshift(e.Infection);
-      deaths.data.unshift(e.Deces);
-      healings.data.unshift(e.Guerisons);
-      indexList.push(new Date(e.Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
+    for(let i=0; i < data.length - 1; i++){
 
-    });
+      cases.data.unshift(data[i].Infection - data[i+1].Infection);
+      deaths.data.unshift(data[i].Deces - data[i+1].Deces);
+      healings.data.unshift(data[i].Guerisons - data[i+1].Guerisons);
+
+      indexList.push(new Date(data[i].Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
+
+    }
+
+    cases.data.unshift(data[data.length - 1].Infection);
+    deaths.data.unshift(data[data.length - 1].Deces);
+    healings.data.unshift(data[data.length - 1].Guerisons);
+
+    indexList.push(new Date(data[data.length - 1].Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
 
     indexList.reverse();
     

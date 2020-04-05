@@ -35,30 +35,24 @@ export class CountryCasesBarGraphComponent implements OnInit, OnChanges {
     let deaths: {data: Number[], label: string} = {data: [], label: 'deaths'};
     let healings: {data: Number[], label: string} = {data: [], label: 'healings'};
     let indexList: string[] = [];
-    let i = 0;
-    let filteredData = this.filteredPaysData;
-    let previousCases = filteredData[filteredData.length - 1].Infection;
-    let previousDeaths = filteredData[filteredData.length - 1].Deces;
-    let previousHealings = filteredData[filteredData.length - 1].Guerisons;
 
-    filteredData.forEach(e => {
+    let data = this.filteredPaysData;
 
-      if(i > 0){
+    for(let i=0; i < data.length - 1; i++){
 
-        cases.data.unshift(previousCases - e.Infection);
-        deaths.data.unshift(previousDeaths - e.Deces);
-        healings.data.unshift(previousHealings - e.Guerisons);
+      cases.data.unshift(data[i].Infection - data[i+1].Infection);
+      deaths.data.unshift(data[i].Deces - data[i+1].Deces);
+      healings.data.unshift(data[i].Guerisons - data[i+1].Guerisons);
 
-      }
+      indexList.push(new Date(data[i].Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
 
-      indexList.push(new Date(e.Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
-      i++
+    }
 
-      previousCases = e.Infection;
-      previousDeaths = e.Deces;
-      previousHealings = e.Guerisons;
+    cases.data.unshift(data[data.length - 1].Infection);
+    deaths.data.unshift(data[data.length - 1].Deces);
+    healings.data.unshift(data[data.length - 1].Guerisons);
 
-    });
+    indexList.push(new Date(data[data.length - 1].Date).toLocaleDateString("fr-FR",{month: 'long', day: 'numeric'}));
 
     indexList.reverse();
     
