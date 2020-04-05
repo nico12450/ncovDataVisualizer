@@ -29,9 +29,8 @@ export class VisualizerComponent implements OnInit {
       }
     })
 
-    console.log(this.paysList);
+    this.paysList.sort();
     
-
   }
 
   switchWithCases(){
